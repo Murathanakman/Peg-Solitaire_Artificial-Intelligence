@@ -80,6 +80,8 @@ class Board:
         self.board[i][j] = value
         return self.board[i][j]
 
+
+"""
 Board = Board()
 print(Board.peg_game_board_initializer())
 Board.print_board()
@@ -87,3 +89,4 @@ print(Board.print_element(3, 3))
 print(Board.update_element(3, 3, 1))
 print(Board.print_element(3, 3))
 Board.print_board()
+"""
