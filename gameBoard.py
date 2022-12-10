@@ -67,26 +67,80 @@ class Board:
     def print_board(self):
         for i in range(7):
             for j in range(7):
-                self.result = print(self.board[i][j], end = " ")
+                print(self.board[i][j], end = " ")
             print()
+        print()
 
-    
     # Select a specific element from peg_game_board_creator() and print it
     def print_element(self, i, j):
         return self.board[i][j]
 
-    # Update the value of a specific element in peg_game_board_creator() and print it
-    def update_element(self, i, j , value):
-        self.board[i][j] = value
-        return self.board[i][j]
+    # Left move with checking out of bounds when move performs
+    def left_move(self, i, j):
+        if j-2 < 0 or self.board[i][j] != 1 or self.board[i][j-1] != 1 or self.board[i][j-2] != 0:
+            return False
+        elif self.board[i][j] == 1 and self.board[i][j-1] == 1 and self.board[i][j-2] == 0:
+            self.board[i][j] = 0
+            self.board[i][j-1] = 0
+            self.board[i][j-2] = 1
+            return self.board
+    
+    # Right move with checking out of bounds when move performs
+    def right_move(self, i, j):
+        if j+2 > 6 or self.board[i][j] != 1 or self.board[i][j+1] != 1 or self.board[i][j+2] != 0:
+            return False
+        if self.board[i][j] == 1 and self.board[i][j+1] == 1 and self.board[i][j+2] == 0:
+            self.board[i][j] = 0
+            self.board[i][j+1] = 0
+            self.board[i][j+2] = 1
+            return self.board
+    
+    # Up move with checking out of bounds when move performs
+    def up_move(self, i, j):
+        if i-2 < 0 or self.board[i][j] != 1 or self.board[i-1][j] != 1 or self.board[i-2][j] != 0:
+            return False
+        elif self.board[i][j] == 1 and self.board[i-1][j] == 1 and self.board[i-2][j] == 0:
+            self.board[i][j] = 0
+            self.board[i-1][j] = 0
+            self.board[i-2][j] = 1
+            return self.board
+        else:
+            return False
 
+    # Down move with checking out of bounds when move performs and updating the board
+    def down_move(self, i, j):
+        if i+2 > 6 or self.board[i][j] != 1 or self.board[i+1][j] != 1 or self.board[i+2][j] != 0:
+            return False
+        elif self.board[i][j] == 1 and self.board[i+1][j] == 1 and self.board[i+2][j] == 0:
+            self.board[i][j] = 0
+            self.board[i+1][j] = 0
+            self.board[i+2][j] = 1
+            return self.board
+        else:
+            return False
 
-"""
+    # Check if the game is completed or not
+    def check_if_game_is_completed(self):
+        for i in range(7):
+            for j in range(7):
+                if self.board[i][j] == 1:
+                    return False
+        if self.board[3][3] == 1:
+            return True
+        else:
+            return False
+
 Board = Board()
 print(Board.peg_game_board_initializer())
 Board.print_board()
 print(Board.print_element(3, 3))
-print(Board.update_element(3, 3, 1))
 print(Board.print_element(3, 3))
 Board.print_board()
-"""
+
+Board.right_move(3, 1)
+
+Board.print_board()
+
+Board.down_move(1, 2)
+
+Board.print_board()
