@@ -1,18 +1,10 @@
-class Board:
-    board = []
-    def __init__(self):
-        self.board = []
-        self.previousMoves = []
+import numpy as np
 
-    # Peg solitaire game board creator
-    def peg_game_board_initializer(self):
-        # i is the row number and j is the column number of the empty board in the 7x7 board initialized below
-        for i in range(7):
-            self.board.append([])
-            for j in range(7):
-                self.board[i].append(0)
-        
-        # The following code is to initialize the board with 9's and 1's and 0's. 9's are the unreachable cells in the board and 1's are the pegs in the board. 0 is the empty board
+# Create a peg solitaire game board using numpy
+class Board:
+    def __init__(self):
+        self.board = np.zeros((7, 7), dtype = int)
+        self.previousMoves = []
         self.board[0][0] = 9
         self.board[0][1] = 9
         self.board[0][2] = 1
@@ -62,20 +54,19 @@ class Board:
         self.board[6][4] = 1
         self.board[6][5] = 9
         self.board[6][6] = 9
+
+    # Return the board array
+    def get_board(self):
         return self.board
 
-    # Print the peg_game_board_creator() function with return
+    # Print the board_initializer function with return
     def print_board(self):
         for i in range(7):
             for j in range(7):
                 print(self.board[i][j], end = " ")
             print()
         print()
-
-    # Select a specific element from peg_game_board_creator() and print it
-    def print_element(self, i, j):
-        return self.board[i][j]
-
+    
     # Left move with checking out of bounds when move performs
     def left_move(self, i, j):
         if j-2 < 0 or self.board[i][j] != 1 or self.board[i][j-1] != 1 or self.board[i][j-2] != 0:
@@ -85,18 +76,22 @@ class Board:
             self.board[i][j-1] = 0
             self.board[i][j-2] = 1
             self.previousMoves.append([i, j, "left"])
-            return self.board
+            return True
+        else:
+            return False
     
     # Right move with checking out of bounds when move performs
     def right_move(self, i, j):
         if j+2 > 6 or self.board[i][j] != 1 or self.board[i][j+1] != 1 or self.board[i][j+2] != 0:
             return False
-        if self.board[i][j] == 1 and self.board[i][j+1] == 1 and self.board[i][j+2] == 0:
+        elif self.board[i][j] == 1 and self.board[i][j+1] == 1 and self.board[i][j+2] == 0:
             self.board[i][j] = 0
             self.board[i][j+1] = 0
             self.board[i][j+2] = 1
             self.previousMoves.append([i, j, "right"])
-            return self.board
+            return True
+        else:
+            return False
     
     # Up move with checking out of bounds when move performs
     def up_move(self, i, j):
@@ -107,7 +102,7 @@ class Board:
             self.board[i-1][j] = 0
             self.board[i-2][j] = 1
             self.previousMoves.append([i, j, "up"])
-            return self.board
+            return True
         else:
             return False
 
@@ -120,7 +115,7 @@ class Board:
             self.board[i+1][j] = 0
             self.board[i+2][j] = 1
             self.previousMoves.append([i, j, "down"])
-            return self.board
+            return True
         else:
             return False
 
@@ -136,24 +131,28 @@ class Board:
             return False
     
     # Return previousMoves array
-    def show_previous_moves(self):
+    def get_previous_moves(self):
         return self.previousMoves
     
-# TESTING
+    # Print previousMoves array
+    def print_previous_moves(self):
+        for i in range(len(self.previousMoves)):
+            print(self.previousMoves[i])
+        print()
 
-Board = Board()
-print(Board.peg_game_board_initializer())
-Board.print_board()
-print(Board.print_element(3, 3))
-print(Board.print_element(3, 3))
-Board.print_board()
+"""
+board = Board()
 
-Board.right_move(3, 1)
+board.print_board()
 
-Board.print_board()
+board.right_move(3, 1)
 
-Board.down_move(1, 2)
+board.print_board()
 
-Board.print_board()
+board.down_move(1, 2)
 
-print(Board.show_previous_moves())
+board.print_board()
+
+print(board.get_previous_moves())
+
+"""
