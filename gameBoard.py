@@ -2,6 +2,7 @@ class Board:
     board = []
     def __init__(self):
         self.board = []
+        self.previousMoves = []
 
     # Peg solitaire game board creator
     def peg_game_board_initializer(self):
@@ -83,6 +84,7 @@ class Board:
             self.board[i][j] = 0
             self.board[i][j-1] = 0
             self.board[i][j-2] = 1
+            self.previousMoves.append([i, j, "left"])
             return self.board
     
     # Right move with checking out of bounds when move performs
@@ -93,6 +95,7 @@ class Board:
             self.board[i][j] = 0
             self.board[i][j+1] = 0
             self.board[i][j+2] = 1
+            self.previousMoves.append([i, j, "right"])
             return self.board
     
     # Up move with checking out of bounds when move performs
@@ -103,6 +106,7 @@ class Board:
             self.board[i][j] = 0
             self.board[i-1][j] = 0
             self.board[i-2][j] = 1
+            self.previousMoves.append([i, j, "up"])
             return self.board
         else:
             return False
@@ -115,6 +119,7 @@ class Board:
             self.board[i][j] = 0
             self.board[i+1][j] = 0
             self.board[i+2][j] = 1
+            self.previousMoves.append([i, j, "down"])
             return self.board
         else:
             return False
@@ -129,6 +134,12 @@ class Board:
             return True
         else:
             return False
+    
+    # Return previousMoves array
+    def show_previous_moves(self):
+        return self.previousMoves
+    
+# TESTING
 
 Board = Board()
 print(Board.peg_game_board_initializer())
@@ -144,3 +155,5 @@ Board.print_board()
 Board.down_move(1, 2)
 
 Board.print_board()
+
+print(Board.show_previous_moves())
