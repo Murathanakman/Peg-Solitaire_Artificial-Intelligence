@@ -1,16 +1,15 @@
 import java.util.ArrayList;
-import java.util.List;
 
 public class Bfs {
 
   public Bfs() {
 
   }
-
+  
   public ArrayList<Node> Search(Node initNode) {
-    List<Node> path = new ArrayList<Node>();
-    List<Node> frontier = new ArrayList<Node>();
-    List<Node> explored = new ArrayList<Node>();
+    ArrayList<Node> path = new ArrayList<Node>();
+    ArrayList<Node> frontier = new ArrayList<Node>();
+    ArrayList<Node> explored = new ArrayList<Node>();
 
     frontier.add(initNode);
     boolean found = false;
@@ -42,7 +41,7 @@ public class Bfs {
 
   }
 
-  public static boolean Contains(List<Node> frontier, Node node) {
+  public static boolean Contains(ArrayList<Node> frontier, Node node) {
     for (int i = 0; i < frontier.size(); i++) {
       if (frontier.get(i).IsSamePuzzle(node.puzzle)) {
         return true;
@@ -53,7 +52,7 @@ public class Bfs {
 
   }
 
-  public void PathTrace(List<Node> path, Node node) {
+  public void PathTrace(ArrayList<Node> path, Node node) {
     System.out.println("Path trace:");
     Node current = node;
     path.add(current);

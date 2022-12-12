@@ -1,10 +1,8 @@
-import java.util.List;
-import java.util.*;
-
+import java.util.ArrayList;
 
 public class Node {
 
-  public List<Node> children = new ArrayList<Node>();
+  public ArrayList<Node> children = new ArrayList<Node>();
   public Node parent;
   public int[] puzzle = new int[49];
 
@@ -46,27 +44,32 @@ public class Node {
 
   // Move to the Right function PEG-SOLITAIRE
   public void MoveRight(int[] puzzle, int index) {
-    if (puzzle[index + 1] == 1 && puzzle[index + 2] == 0) {
+    try {
+      if (puzzle[index + 1] == 1 && puzzle[index + 2] == 0) {
 
-      int[] newPuzzle = new int[49];
-      copyPuzzle(puzzle, newPuzzle);
-
-      newPuzzle[index] = 0;
-      newPuzzle[index + 1] = 0;
-      newPuzzle[index + 2] = 1;
-
-      // Create a new node
-      Node child = new Node(newPuzzle);
-      children.add(child);
-
-      // Set the parent of the new node
-      child.parent = this;
-
-    }
+        int[] newPuzzle = new int[49];
+        copyPuzzle(puzzle, newPuzzle);
+  
+        newPuzzle[index] = 0;
+        newPuzzle[index + 1] = 0;
+        newPuzzle[index + 2] = 1;
+  
+        // Create a new node
+        Node child = new Node(newPuzzle);
+        children.add(child);
+  
+        // Set the parent of the new node
+        child.parent = this;
+  
+      }
+   } catch(ArrayIndexOutOfBoundsException e) {
+      return;
+   }
   }
 
   // Move to the Left function PEG-SOLITAIRE
   public void MoveLeft(int[] puzzle, int index) {
+  try{
     if (puzzle[index - 1] == 1 && puzzle[index - 2] == 0) {
 
       int[] newPuzzle = new int[49];
@@ -84,10 +87,14 @@ public class Node {
       child.parent = this;
 
     }
+  } catch(ArrayIndexOutOfBoundsException e) {
+    return;
+  }
   }
 
-  // Move Up function PEG-SOLITAIRE
+  // Move Up function
   public void MoveUp(int[] puzzle, int index) {
+  try{
     if (puzzle[index - 7] == 1 && puzzle[index - 14] == 0) {
 
       int[] newPuzzle = new int[49];
@@ -104,10 +111,14 @@ public class Node {
       // Set the parent of the new node
       child.parent = this;
     }
+  } catch(ArrayIndexOutOfBoundsException e) {
+    return;
+  }
   }
 
   // Move Down function PEG-SOLITAIRE
   public void MoveDown(int[] puzzle, int index) {
+  try{
     if (puzzle[index + 7] == 1 && puzzle[index + 14] == 0) {
 
       int[] newPuzzle = new int[49];
@@ -124,6 +135,9 @@ public class Node {
       // Set the parent of the new node
       child.parent = this;
     }
+  } catch(ArrayIndexOutOfBoundsException e) {
+    return;
+  }
   }
 
   public void PrintPuzzle() {
@@ -133,6 +147,7 @@ public class Node {
         System.out.println();
       }
     }
+    System.out.println();
   }
 
   public boolean IsSamePuzzle(int[] puzzle) {
