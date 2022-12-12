@@ -19,10 +19,10 @@ public class Node {
   public void ExpandNode() {
     for (int i = 0; i < puzzle.length; i++) {
       if (puzzle[i] == 1) {
+        MoveDown(puzzle, i);
         MoveRight(puzzle, i);
         MoveLeft(puzzle, i);
         MoveUp(puzzle, i);
-        MoveDown(puzzle, i);
       }
     }
   }

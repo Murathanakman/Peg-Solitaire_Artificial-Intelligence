@@ -1,8 +1,8 @@
 import java.util.ArrayList;
 
-public class Bfs {
+public class BFS {
 
-  public Bfs() {
+  public BFS() {
 
   }
   
@@ -38,7 +38,6 @@ public class Bfs {
       }
     }
 	return null;
-
   }
 
   public static boolean Contains(ArrayList<Node> frontier, Node node) {
