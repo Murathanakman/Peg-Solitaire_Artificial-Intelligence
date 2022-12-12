@@ -14,6 +14,7 @@ public class BFS {
     frontier.add(initNode);
     boolean found = false;
 
+    
     while (frontier.size() > 0 && !found) {
       Node currentNode = frontier.get(0);
       explored.add(currentNode);
@@ -37,6 +38,7 @@ public class BFS {
         }
       }
     }
+  
 	return null;
   }
 

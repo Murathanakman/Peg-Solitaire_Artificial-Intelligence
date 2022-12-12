@@ -11,17 +11,16 @@ public class DFS {
 
     frontier.add(initNode);
     boolean found = false;
-
-    for(int i = 0; i < 30; i++){
-        while(frontier.size() > 0 && !found) {
+   
+    while(frontier.size() > 0 && !found) {
+       
         Node currentNode = frontier.get(frontier.size() - 1);
         explored.add(currentNode);
         frontier.remove(frontier.size() - 1);
 
-        currentNode.ExpandNode();
+        currentNode.DFS_ExpandNode();
         currentNode.PrintPuzzle();
-
-        for (int k = 0; k < currentNode.children.size(); k++) {
+        for (int i = 0; i < currentNode.children.size(); i++) {
             Node currentChild = currentNode.children.get(i);
             if (currentChild.GoalTest()) {
             System.out.println("Found solution!");
@@ -35,10 +34,12 @@ public class DFS {
             frontier.add(currentChild);
             }
         }
-        }
+       
     }
+    
   return null;
   }
+
   public static boolean Contains(ArrayList<Node> frontier, Node node) {
     for (int i = 0; i < frontier.size(); i++) {
       if (frontier.get(i).IsSamePuzzle(node.puzzle)) {

@@ -22,10 +22,12 @@ public class Main {
     ArrayList<Node> solution = bfs.Search(initNode);
     */
 
+    
     Node initNode = new Node(puzzle);
     DFS dfs = new DFS();
 
     ArrayList<Node> solution = dfs.Search(initNode);
+    
 
     if (solution.size() > 0) {
       for (int i = 0; i < solution.size(); i++) {

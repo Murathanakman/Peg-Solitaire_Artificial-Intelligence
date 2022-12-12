@@ -16,13 +16,24 @@ public class Node {
     }
   }
 
-  public void ExpandNode() {
+  public void BFS_ExpandNode() {
     for (int i = 0; i < puzzle.length; i++) {
       if (puzzle[i] == 1) {
         MoveDown(puzzle, i);
         MoveRight(puzzle, i);
         MoveLeft(puzzle, i);
         MoveUp(puzzle, i);
+      }
+    }
+  }
+
+  public void DFS_ExpandNode() {
+    for (int i = 0; i < puzzle.length; i++) {
+      if (puzzle[i] == 1) {
+        MoveUp(puzzle, i);
+        MoveLeft(puzzle, i);
+        MoveRight(puzzle, i);
+        MoveDown(puzzle, i);
       }
     }
   }
