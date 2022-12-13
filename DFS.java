@@ -18,7 +18,7 @@ public class DFS {
         explored.add(currentNode);
         frontier.remove(frontier.size() - 1);
 
-        currentNode.DFS_ExpandNode();
+        currentNode.ExpandNode();
         currentNode.PrintPuzzle();
         for (int i = 0; i < currentNode.children.size(); i++) {
             Node currentChild = currentNode.children.get(i);

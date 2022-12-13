@@ -15,20 +15,18 @@ public class Main {
         9, 9, 1, 1, 1, 9, 9
     };
 
-    /*
+    /* 
     Node initNode = new Node(puzzle);
     BFS bfs = new BFS();
 
     ArrayList<Node> solution = bfs.Search(initNode);
     */
-
     
     Node initNode = new Node(puzzle);
     DFS dfs = new DFS();
 
     ArrayList<Node> solution = dfs.Search(initNode);
     
-
     if (solution.size() > 0) {
       for (int i = 0; i < solution.size(); i++) {
         solution.get(i).PrintPuzzle();

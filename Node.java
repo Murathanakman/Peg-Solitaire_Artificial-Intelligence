@@ -16,25 +16,13 @@ public class Node {
     }
   }
 
-  public void BFS_ExpandNode() {
+  // düzelt
+  public void ExpandNode() {
     for (int i = 0; i < puzzle.length; i++) {
-      if (puzzle[i] == 1) {
         MoveDown(puzzle, i);
         MoveRight(puzzle, i);
         MoveLeft(puzzle, i);
-        MoveUp(puzzle, i);
-      }
-    }
-  }
-
-  public void DFS_ExpandNode() {
-    for (int i = 0; i < puzzle.length; i++) {
-      if (puzzle[i] == 1) {
-        MoveUp(puzzle, i);
-        MoveLeft(puzzle, i);
-        MoveRight(puzzle, i);
-        MoveDown(puzzle, i);
-      }
+        MoveUp(puzzle, i);  
     }
   }
 
@@ -56,22 +44,23 @@ public class Node {
   // Move to the Right function PEG-SOLITAIRE
   public void MoveRight(int[] puzzle, int index) {
     try {
-      if (puzzle[index + 1] == 1 && puzzle[index + 2] == 0) {
-
-        int[] newPuzzle = new int[49];
-        copyPuzzle(puzzle, newPuzzle);
-  
-        newPuzzle[index] = 0;
-        newPuzzle[index + 1] = 0;
-        newPuzzle[index + 2] = 1;
-  
-        // Create a new node
-        Node child = new Node(newPuzzle);
-        children.add(child);
-  
-        // Set the parent of the new node
-        child.parent = this;
-  
+      if (puzzle[index] == 1 && puzzle[index + 1] == 1 && puzzle[index + 2] == 0) {
+        // Control some indexes to prevent error caused by one dimensional array
+        if(index != 19 && index != 20 && index != 26 && index != 27){
+          int[] newPuzzle = new int[49];
+          copyPuzzle(puzzle, newPuzzle);
+    
+          newPuzzle[index] = 0;
+          newPuzzle[index + 1] = 0;
+          newPuzzle[index + 2] = 1;
+    
+          // Create a new node
+          Node child = new Node(newPuzzle);
+          children.add(child);
+    
+          // Set the parent of the new node
+          child.parent = this;
+        }
       }
    } catch(ArrayIndexOutOfBoundsException e) {
       return;
@@ -81,22 +70,23 @@ public class Node {
   // Move to the Left function PEG-SOLITAIRE
   public void MoveLeft(int[] puzzle, int index) {
   try{
-    if (puzzle[index - 1] == 1 && puzzle[index - 2] == 0) {
+    if (puzzle[index] == 1 && puzzle[index - 1] == 1 && puzzle[index - 2] == 0) {
+      // Control some indexes to prevent error caused by one dimensional array
+      if(index != 14 && index != 15 && index != 21 && index != 22){
+        int[] newPuzzle = new int[49];
+        copyPuzzle(puzzle, newPuzzle);
 
-      int[] newPuzzle = new int[49];
-      copyPuzzle(puzzle, newPuzzle);
+        newPuzzle[index] = 0;
+        newPuzzle[index - 1] = 0;
+        newPuzzle[index - 2] = 1;
 
-      newPuzzle[index] = 0;
-      newPuzzle[index - 1] = 0;
-      newPuzzle[index - 2] = 1;
+        // Create a new node
+        Node child = new Node(newPuzzle);
+        children.add(child);
 
-      // Create a new node
-      Node child = new Node(newPuzzle);
-      children.add(child);
-
-      // Set the parent of the new node
-      child.parent = this;
-
+        // Set the parent of the new node
+        child.parent = this;
+      }
     }
   } catch(ArrayIndexOutOfBoundsException e) {
     return;
@@ -106,21 +96,23 @@ public class Node {
   // Move Up function
   public void MoveUp(int[] puzzle, int index) {
   try{
-    if (puzzle[index - 7] == 1 && puzzle[index - 14] == 0) {
+    if (puzzle[index] == 1  && puzzle[index - 7] == 1 && puzzle[index - 14] == 0) {
+      // Control some indexes to prevent error caused by one dimensional array
+      if(index != 2 && index != 3 && index != 4 && index != 9 && index != 10 && index != 11){
+        int[] newPuzzle = new int[49];
+        copyPuzzle(puzzle, newPuzzle);
 
-      int[] newPuzzle = new int[49];
-      copyPuzzle(puzzle, newPuzzle);
+        newPuzzle[index] = 0;
+        newPuzzle[index - 7] = 0;
+        newPuzzle[index - 14] = 1;
 
-      newPuzzle[index] = 0;
-      newPuzzle[index - 7] = 0;
-      newPuzzle[index - 14] = 1;
+        // Create a new node
+        Node child = new Node(newPuzzle);
+        children.add(child);
 
-      // Create a new node
-      Node child = new Node(newPuzzle);
-      children.add(child);
-
-      // Set the parent of the new node
-      child.parent = this;
+        // Set the parent of the new node
+        child.parent = this;
+      }
     }
   } catch(ArrayIndexOutOfBoundsException e) {
     return;
@@ -130,21 +122,22 @@ public class Node {
   // Move Down function PEG-SOLITAIRE
   public void MoveDown(int[] puzzle, int index) {
   try{
-    if (puzzle[index + 7] == 1 && puzzle[index + 14] == 0) {
+    if (puzzle[index] == 1 && puzzle[index + 7] == 1 && puzzle[index + 14] == 0) {
+      if(index != 37 && index != 38 && index != 39 && index != 44 && index != 45 && index != 46){
+        int[] newPuzzle = new int[49];
+        copyPuzzle(puzzle, newPuzzle);
 
-      int[] newPuzzle = new int[49];
-      copyPuzzle(puzzle, newPuzzle);
+        newPuzzle[index] = 0;
+        newPuzzle[index + 7] = 0;
+        newPuzzle[index + 14] = 1;
 
-      newPuzzle[index] = 0;
-      newPuzzle[index + 7] = 0;
-      newPuzzle[index + 14] = 1;
+        // Create a new node
+        Node child = new Node(newPuzzle);
+        children.add(child);
 
-      // Create a new node
-      Node child = new Node(newPuzzle);
-      children.add(child);
-
-      // Set the parent of the new node
-      child.parent = this;
+        // Set the parent of the new node
+        child.parent = this;
+      }
     }
   } catch(ArrayIndexOutOfBoundsException e) {
     return;
