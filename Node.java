@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class Node {
 
@@ -26,7 +26,7 @@ public class Node {
     }
   }
 
-  // Goal test function PEG-SOLITAIRE //DÜZELT
+  // Goal test function PEG-SOLITAIRE
   public boolean GoalTest() {
     int count = 0;
     for (int i = 0; i < puzzle.length; i++) {
@@ -34,7 +34,8 @@ public class Node {
         count++;
       }
     }
-    if (count == 1) {
+    if (count == 1 && puzzle[24] == 1) {
+      System.out.println("ii. Optimum solution found.");
       return true;
     } else {
       return false;

@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 public class BFS {
 
@@ -42,6 +42,7 @@ public class BFS {
 	return null;
   }
 
+  //Remove
   public static boolean Contains(ArrayList<Node> frontier, Node node) {
     for (int i = 0; i < frontier.size(); i++) {
       if (frontier.get(i).IsSamePuzzle(node.puzzle)) {

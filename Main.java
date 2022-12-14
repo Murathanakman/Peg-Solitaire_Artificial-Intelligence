@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.*;
 
 // Create main class
 public class Main {
@@ -21,20 +21,26 @@ public class Main {
 
     ArrayList<Node> solution = bfs.Search(initNode);
     */
-    
-    Node initNode = new Node(puzzle);
-    DFS dfs = new DFS();
 
-    ArrayList<Node> solution = dfs.Search(initNode);
+    Node initNode = new Node(puzzle);
     
-    if (solution.size() > 0) {
-      for (int i = 0; i < solution.size(); i++) {
-        solution.get(i).PrintPuzzle();
+     //Time spent on the dfs
+    long dfsStartTime = System.nanoTime();
+    DFS dfs = new DFS();
+    ArrayList<Node> path = dfs.Search(initNode);  
+    long dfsEndTime = System.nanoTime();
+    long dfsTimeSpent = dfsEndTime - dfsStartTime;
+    
+    if (path.size() > 0) {
+      System.out.println("iii. The board states from the initial state to the final state: ");
+      for (int i = 0; i < path.size(); i++) {
+        path.get(i).PrintPuzzle();
       }
     } else {
+      //??? Bu kalkabilir
       System.out.println("No solution found!");
     }
-    
-
+    //Nanoseconds to seconds
+    System.out.println("iv. Time spent on the dfs: " + dfsTimeSpent + " nanoseconds");
   }
 }
