@@ -19,11 +19,13 @@ public class Node {
   // düzelt
   public void ExpandNode() {
     for (int i = 0; i < puzzle.length; i++) {
-        MoveDown(puzzle, i);
-        MoveRight(puzzle, i);
-        MoveLeft(puzzle, i);
-        MoveUp(puzzle, i);  
-    }
+
+      MoveDown(puzzle, i);
+      MoveRight(puzzle, i);
+      MoveLeft(puzzle, i);
+      MoveUp(puzzle, i);
+
+      }
   }
 
   // Goal test function PEG-SOLITAIRE
@@ -34,10 +36,12 @@ public class Node {
         count++;
       }
     }
+    //Optimum solution
     if (count == 1 && puzzle[24] == 1) {
       System.out.println("ii. Optimum solution found.");
       return true;
-    } else {
+    }
+    else {
       return false;
     }
   }
