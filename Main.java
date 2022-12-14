@@ -71,7 +71,7 @@ public class Main {
        long endTime = System.nanoTime();
        long timeSpent = endTime - startTime;
        timeSpent = timeSpent / 1000000;
-       
+
        // Check if the elapsed time has exceeded the time limit
        //min to ns = multiply by 60000000000L
        if (timeSpent > timeLimit * 60000000000L) {
@@ -95,6 +95,9 @@ public class Main {
       } catch (OutOfMemoryError e) {
          System.out.println("ii. No solution found – Out of Memory");
         }
-     } 
+    } 
+    else{
+      System.out.println("Please enter a valid search method.");
+    }
   }
 }
