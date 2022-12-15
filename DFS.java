@@ -3,6 +3,7 @@ public class DFS {
   private ArrayList<Node> path = new ArrayList<Node>();
   private ArrayList<Node> frontier = new ArrayList<Node>();
   private ArrayList<Node> explored = new ArrayList<Node>(); // Expanded yap
+  private ArrayList<Node> subOptimal = new ArrayList<Node>();
   // Inıtıal node added to frontier
   private int memorySize = 1;
   public DFS() {
@@ -24,6 +25,10 @@ public class DFS {
   public int getMemorySize() {
     return memorySize;
   }
+
+  public ArrayList<Node> getSubOptimal() {
+    return subOptimal;
+  }
   
   public void PathTrace(ArrayList<Node> path, Node node) {
     Node current = node;
@@ -32,6 +37,24 @@ public class DFS {
       current = current.parent;
       path.add(current);
     }
+  }
+
+  public ArrayList<Node> FindBestSubOptimal(ArrayList<Node> path){
+    int count = 0;
+    int best = 0;
+    for (int i = 0; i < path.size(); i++) {
+      Node node = subOptimal.get(i);
+      for(int j = 0; j < node.puzzle.length; j++){
+        if (node.puzzle[j] == 1){
+
+          count++;
+        }
+      }
+      if(count > best){
+        best = count;
+      }
+    }
+    return path;
   }
 
   public ArrayList<Node> Search(Node initNode) {
@@ -46,6 +69,9 @@ public class DFS {
           /*Print frontier queue (Sonradan silinecek)
           currentNode.PrintPuzzle();
           */
+          if(currentNode.children.size() == 0){
+              subOptimal.add(currentNode);
+          }
           for (int i = 0; i < currentNode.children.size(); i++) {
               Node currentChild = currentNode.children.get(i);
               if (currentChild.GoalTest()) {

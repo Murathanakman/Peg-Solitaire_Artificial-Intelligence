@@ -10,6 +10,11 @@ public class Node {
     SetPuzzle(puzzle);
   }
 
+  //get Puzzle
+  public int[] GetPuzzle() {
+    return puzzle;
+  }
+
   public void SetPuzzle(int[] puzzle) {
     for (int i = 0; i < puzzle.length; i++) {
       this.puzzle[i] = puzzle[i];
