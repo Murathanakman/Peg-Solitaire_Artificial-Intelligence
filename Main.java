@@ -40,7 +40,6 @@ public class Main {
       long timeSpent = endTime - startTime;
       timeSpent = timeSpent / 1000000;
       // Check if the elapsed time has exceeded the time limit
-
       //min to ns = multiply by 60000000000L
       if (timeSpent > timeLimit * 60000000000L) {
         System.out.println("ii. No solution found – Time Limit");
@@ -95,7 +94,42 @@ public class Main {
       } catch (OutOfMemoryError e) {
          System.out.println("ii. No solution found – Out of Memory");
         }
+    }
+    else if(searchMethod.equals("dfsrs") || searchMethod.equals("depth first search with random selection") || searchMethod.equals("depth-first search with random selection")){
+      try{
+       System.out.println("i. Search method is depth first search random selection and the time limit is " + timeLimit + " minutes.");
+       long startTime = System.nanoTime();
+       DFSRS dfsrs = new DFSRS();
+       ArrayList<Node> path = dfsrs.Search(initNode);
+       long endTime = System.nanoTime();
+       long timeSpent = endTime - startTime;
+       timeSpent = timeSpent / 1000000;
+
+       // Check if the elapsed time has exceeded the time limit
+       //min to ns = multiply by 60000000000L
+       if (timeSpent > timeLimit * 60000000000L) {
+         System.out.println("ii. No solution found – Time Limit");
+         return;
+       }
+ 
+       if (path.size() > 0) {
+         System.out.println("iii. The board states from the initial state to the final state: ");
+         for (int i = 0; i < path.size(); i++) {
+           path.get(i).PrintPuzzle();
+         }
+       }
+       if(!(timeSpent > timeLimit * 60000000000L)){
+         //Nanoseconds to ms
+         System.out.println("iv. Time spent on the dfs: " + timeSpent + " ms");
+       }
+
+       System.out.println("v. The number of nodes expanded during the search: " + dfsrs.getExplored().size());
+       System.out.println("vi. Max number of nodes stored in the memory during the search: " + dfsrs.getMemorySize());
+      } catch (OutOfMemoryError e) {
+         System.out.println("ii. No solution found – Out of Memory");
+        }
     } 
+
     else{
       System.out.println("Please enter a valid search method.");
     }
