@@ -43,10 +43,9 @@ public class DFS {
     int count = 0;
     int best = 0;
     for (int i = 0; i < path.size(); i++) {
-      Node node = subOptimal.get(i);
-      for(int j = 0; j < node.puzzle.length; j++){
-        if (node.puzzle[j] == 1){
-
+      Node current = subOptimal.get(i);
+      for(int j = 0; j < current.puzzle.length; j++){
+        if (current.puzzle[j] == 1){
           count++;
         }
       }
