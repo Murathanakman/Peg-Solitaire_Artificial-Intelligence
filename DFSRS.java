@@ -33,22 +33,16 @@ public class DFSRS {
         boolean found = false;
         Node currentNode = initNode;
         while(frontier.size() > 0 && !found) {
-            // Generate a random index in the range [0, frontier.size() - 1]
-            int randomIndex = new Random().nextInt(currentNode.children.size());
-    
-            // Get the node at the random index
-            currentNode = frontier.get(randomIndex);
-            if(frontier.get(randomIndex) == currentNode.parent){
-                continue;
-            }
-    
             // Remove the selected node from the frontier
             // düzelt
-            frontier.remove(randomIndex);
-    
             explored.add(currentNode);
             currentNode.ExpandNode();
-            
+
+            // Generate a random index
+            if(currentNode.children.size() > 0){
+              int randomIndex = new Random().nextInt(currentNode.children.size() - 1);
+              currentNode = currentNode.children.get(randomIndex);
+            }
             currentNode.PrintPuzzle();
             
             for (int i = 0; i < currentNode.children.size(); i++) {

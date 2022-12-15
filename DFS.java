@@ -5,7 +5,6 @@ public class DFS {
   private ArrayList<Node> frontier = new ArrayList<Node>();
   private ArrayList<Node> explored = new ArrayList<Node>(); // Expanded yap
   private ArrayList<Node> subOptimal = new ArrayList<Node>();
-  public ArrayList<Node> So = new ArrayList<>();
   // Inıtıal node added to frontier
   private int memorySize = 1;
 
@@ -102,9 +101,13 @@ public class DFS {
 
     // If goal state is not found, find the best sub-optimal path
     if (found = false) {
-      So.add(FindBestSubOptimal(subOptimal)); // Add a bestNode (single one) to the So array which includes keeping a
-                                              // single best node.
-      return So;
+      // Add a bestNode (single one) to the So array which includes keeping a
+      // single best node.
+      PathTrace(path, FindBestSubOptimal(subOptimal));
+      // Reverse the path
+      Collections.reverse(path);
+      return path ;
+
     } else {
       Collections.reverse(path);// Reverse the path
       return path;
