@@ -66,39 +66,36 @@ public class DFS {
     frontier.add(initNode);
     boolean found = false;
     while (frontier.size() > 0 && !found) {
-
-      Node currentNode = frontier.get(frontier.size() - 1);
-      explored.add(currentNode);
-      frontier.remove(frontier.size() - 1);
-      currentNode.ExpandNode();
-      /*
-       * Print frontier queue (Sonradan silinecek)
-       * currentNode.PrintPuzzle();
-       */
-      if (currentNode.children.size() == 0) {
-        subOptimal.add(currentNode);
-      }
-      for (int i = 0; i < currentNode.children.size(); i++) {
-        Node currentChild = currentNode.children.get(i);
-        if (currentChild.GoalTest()) {
-          /*
-           * Print goal state if exists (Sonradan silinecek)
-           * currentChild.PrintPuzzle();
-           */
-          found = true;
-          // Backtrack to find the path
-
-          PathTrace(path, currentChild);
+        Node currentNode = frontier.get(frontier.size() - 1);
+        explored.add(currentNode);
+        frontier.remove(frontier.size() - 1);
+        currentNode.ExpandNode();
+        for (int i = currentNode.children.size()-1; i >= 0; i--) {
+          if (!Contains(frontier, currentNode.children.get(i)) && !Contains(explored, currentNode.children.get(i))) {
+            frontier.add(currentNode.children.get(i));
+            memorySize++;
+          }
         }
-
-        // Contains programın duplicate data yapmasının önüne geçmek için var
-        if (!Contains(frontier, currentChild) && !Contains(explored, currentChild)) {
-          frontier.add(currentChild);
-          memorySize++;
+        currentNode.PrintPuzzle();
+        
+        if (currentNode.children.size() == 0) {
+          subOptimal.add(currentNode);
         }
-      }
+        else if(currentNode.children.size() > 0){
+          Node currentChild = currentNode.children.get(currentNode.children.size() - 1);
+          if (currentChild.GoalTest()) {
+            /*
+            * Print goal state if exists (Sonradan silinecek)
+            * currentChild.PrintPuzzle();
+            */
+            found = true;
+            // Backtrack to find the path
+
+            PathTrace(path, currentChild);
+          }
+        }
     }
-
+    
     // If goal state is not found, find the best sub-optimal path
     if (found = false) {
       // Add a bestNode (single one) to the So array which includes keeping a
