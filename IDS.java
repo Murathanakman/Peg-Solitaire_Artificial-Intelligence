@@ -8,7 +8,8 @@ public class IDS {
   public ArrayList<Node> So = new ArrayList<>();
   // Inıtıal node added to frontier
   private int memorySize = 1;
-  private int sum = 0;
+  private int depthLimit = 0;
+  private boolean found = false;
 
   public IDS() {
 
@@ -65,60 +66,53 @@ public class IDS {
   }
 
   public ArrayList<Node> Search(Node initNode) {
-    int depth = 0;
-    boolean found = false;
 
-    while (!found) {
-      ArrayList<Node> result = DepthLimitedSearch(initNode, depth);
+    while (!found && depthLimit <= 40) {
+      frontier.clear(); // Clear the frontier arraylist.
+      explored.clear(); // Clear the explored arraylist.
+      memorySize = 1; // Memory size is 1 because of the initial node. reset memory size
 
-      if (result != null) {
-        return result;
-      }
-      depth++;
-    }
-    return null;
-  }
+      frontier.add(initNode);
 
-  private ArrayList<Node> DepthLimitedSearch(Node node, int depthLimit) {
-    boolean found = false;
-    frontier.add(node);
-    while (frontier.size() > 0) {
-      Node currNode = frontier.remove(frontier.size() - 1);
-      explored.add(currNode);
+      while (frontier.size() > 0 && !found) {
+        Node current = frontier.get(frontier.size() - 1);
+        explored.add(current);
+        frontier.remove(frontier.size() - 1);
+        current.ExpandNode();
 
-      if (currNode.GoalTest()) {
-        PathTrace(path, currNode);
-        found = true;
-        return path;
-      }
-
-      if (depthLimit > 0) {
-        currNode.ExpandNode();
-        sum++;
-        System.out.println(sum);
-        currNode.PrintPuzzle();
-
-        for (Node child : currNode.children) {
-
-          if (!Contains(frontier, child) && !Contains(explored, child)) {
-            frontier.add(child);
-            memorySize++;
+        for (int i = current.children.size() - 1; i >= 0; i--) {
+          if (!Contains(frontier, current.children.get(i)) && !Contains(explored, current.children.get(i))) {
+            if (current.depth + 1 <= depthLimit) {
+              frontier.add(current.children.get(i));
+              memorySize++;
+            }
           }
         }
-        if (currNode.children.size() == 0) {
-          subOptimal.add(currNode);
+        current.PrintPuzzle();
+
+        if (current.children.size() == 0) {
+          subOptimal.add(current);
         }
 
+        else if (current.children.size() > 0) {
+          Node currentChild = current.children.get(current.children.size() - 1);
+          if (currentChild.GoalTest()) {
+            found = true;
+            PathTrace(path, currentChild);
+          }
+        }
       }
-
+      depthLimit++;
     }
 
-    if (found == false) {
+    if (!found) {
       PathTrace(path, FindBestSubOptimal(subOptimal));
       Collections.reverse(path);
       return path;
+    } else {
+      Collections.reverse(path);
+      return path;
     }
-    return null;
   }
 
   // Remove
