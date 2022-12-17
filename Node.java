@@ -5,7 +5,7 @@ public class Node {
   public ArrayList<Node> children = new ArrayList<Node>();
   public Node parent;
   public int[] puzzle = new int[49];
-  public int depth;
+  public int depth = 0;
 
   public Node(int[] puzzle) {
     SetPuzzle(puzzle);
@@ -44,7 +44,6 @@ public class Node {
     }
     //Optimum solution
     if (count == 1 && puzzle[24] == 1) {
-      System.out.println("ii. Optimum solution found.");
       return true;
     }
     else {
