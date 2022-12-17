@@ -5,6 +5,7 @@ public class Node {
   public ArrayList<Node> children = new ArrayList<Node>();
   public Node parent;
   public int[] puzzle = new int[49];
+  public int depth;
 
   public Node(int[] puzzle) {
     SetPuzzle(puzzle);
