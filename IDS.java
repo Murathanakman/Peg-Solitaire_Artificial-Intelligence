@@ -19,7 +19,7 @@ public class IDS {
   public ArrayList<Node> Search(Node initNode) {
     boolean found = false;
     boolean subFound = false;
-    while (!found && depthLimit <= 40) {
+    while (!found && depthLimit <= 100) {
       elapsedTime = System.currentTimeMillis() - startTime;
       if (elapsedTime > timeLimit * 1000) {  //Time limit
         break;
@@ -27,7 +27,6 @@ public class IDS {
       frontier.clear(); // Clear the frontier arraylist.
       explored.clear(); // Clear the explored arraylist.
       memorySize = 1; // Memory size is 1 because of the initial node. reset memory size
-
       frontier.add(initNode);
 
       while (frontier.size() > 0 && !found) {
@@ -67,14 +66,17 @@ public class IDS {
       PathTrace(path, FindBestSubOptimal(subOptimal));
       System.out.println("ii. Sub-optimum Solution Found with " + subOptimalPegNumber() + " remaining pegs");
       Collections.reverse(path);
+      elapsedTime = System.currentTimeMillis() - startTime;
       return path;
     } 
     else if (found == true){
       // Reverse the path
       Collections.reverse(path);
+      elapsedTime = System.currentTimeMillis() - startTime;
       return path;
     }
     else{
+      elapsedTime = System.currentTimeMillis() - startTime;
       return null;
     }
   }
