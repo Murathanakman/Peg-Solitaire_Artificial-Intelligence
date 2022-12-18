@@ -1,5 +1,7 @@
 import java.util.*;
 
+import javax.swing.plaf.synth.SynthSpinnerUI;
+
 public class Heuristic {
   private long timeLimit;
   private long elapsedTime;
@@ -29,17 +31,15 @@ public class Heuristic {
 
         currentNode.ExpandNode();
 
-        //Heuristic
+        //Heuristic 
         currentNode.SortChildren();
-
         for (int i = currentNode.children.size()-1; i >= 0; i--) {
           if (!Contains(frontier, currentNode.children.get(i)) && !Contains(explored, currentNode.children.get(i))) {
             frontier.add(currentNode.children.get(i));
             memorySize++;
           }
         }
-        //currentNode.PrintPuzzle();
-        
+
         if (currentNode.children.size() == 0 && currentNode.GoalTest() == false) {
           subFound = true;
           subOptimal.add(currentNode);

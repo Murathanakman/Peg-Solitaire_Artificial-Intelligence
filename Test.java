@@ -39,11 +39,11 @@ public class Test {
             }
             }
             catch(NullPointerException e){
-                System.out.println("ii. No solution found – Time Limit.");
+                System.out.println("ii. No solution found Time Limit.");
             }
               
             catch(OutOfMemoryError e){
-              System.out.println("ii. No solution found – Out of Memory");
+              System.out.println("ii. No solution found Out of Memory");
             }
             System.out.println("iv. Time spent on the bfs: " + bfs.getElapsedTime() + " ms");
             System.out.println("v. The number of nodes expanded during the search: " + bfs.getExplored().size());
@@ -62,11 +62,11 @@ public class Test {
             }
             }
             catch(NullPointerException e){
-                System.out.println("ii. No solution found – Time Limit.");
+                System.out.println("ii. No solution found Time Limit.");
             }
               
             catch(OutOfMemoryError e){
-              System.out.println("ii. No solution found – Out of Memory");
+              System.out.println("ii. No solution found Out of Memory");
             }
             System.out.println("iv. Time spent on the dfs: " + dfs.getElapsedTime() + " ms");
             System.out.println("v. The number of nodes expanded during the search: " + dfs.getExplored().size());
@@ -85,11 +85,11 @@ public class Test {
             }
             }
             catch(NullPointerException e){
-                System.out.println("ii. No solution found – Time Limit.");
+                System.out.println("ii. No solution found Time Limit.");
             }
               
             catch(OutOfMemoryError e){
-              System.out.println("ii. No solution found – Out of Memory");
+              System.out.println("ii. No solution found Out of Memory");
             }
             System.out.println("iv. Time spent on the ids: " + ids.getElapsedTime() + " ms");
             System.out.println("v. The number of nodes expanded during the search: " + ids.getExplored().size());
@@ -108,18 +108,18 @@ public class Test {
             }
             }
             catch(NullPointerException e){
-                System.out.println("ii. No solution found – Time Limit.");
+                System.out.println("ii. No solution found Time Limit.");
             }
               
             catch(OutOfMemoryError e){
-              System.out.println("ii. No solution found – Out of Memory");
+              System.out.println("ii. No solution found Out of Memory");
             }
             System.out.println("iv. Time spent on the dfsrs: " + dfsrs.getElapsedTime() + " ms");
             System.out.println("v. The number of nodes expanded during the search: " + dfsrs.getExplored().size());
             System.out.println("vi. Max number of nodes stored in the memory during the search: " + dfsrs.getMemorySize());
         }
-        else if(searchMethod.equals("Heuristic") || searchMethod.equals("Depth-First Search with a Node Selection Heuristic") || searchMethod.equals("Depth-First Search with a Node Selection Heuristic")){
-            System.out.println("i. Search method is depth first search and the time limit is " + timeLimit + " seconds.");
+        else if(searchMethod.equals("heuristic") || searchMethod.equals("depth-First search with a node selection heuristic") || searchMethod.equals("depth-first search with a node selection heuristic")){
+            System.out.println("i. Search method is depth first search with a node selection heuristic and the time limit is " + timeLimit + " seconds.");
             Heuristic heuristic = new Heuristic(timeLimit);
             try{
             ArrayList<Node> path = heuristic.Search(initNode);  
@@ -131,17 +131,15 @@ public class Test {
             }
             }
             catch(NullPointerException e){
-                System.out.println("ii. No solution found – Time Limit.");
+                System.out.println("ii. No solution found Time Limit.");
             }
               
             catch(OutOfMemoryError e){
-              System.out.println("ii. No solution found – Out of Memory");
+              System.out.println("ii. No solution found Out of Memory");
             }
             System.out.println("iv. Time spent on the dfs: " + heuristic.getElapsedTime() + " ms");
             System.out.println("v. The number of nodes expanded during the search: " + heuristic.getExplored().size());
             System.out.println("vi. Max number of nodes stored in the memory during the search: " + heuristic.getMemorySize());
         }
-        
-        
     }
 }

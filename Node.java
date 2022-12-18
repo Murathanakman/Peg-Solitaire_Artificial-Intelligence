@@ -31,7 +31,6 @@ public class Node {
       MoveRight(puzzle, i);
       MoveLeft(puzzle, i);
       MoveUp(puzzle, i);
-
       }
   }
 
@@ -57,9 +56,6 @@ public class Node {
         else if (puzzle[index] == 1 && puzzle[index - 7] == 1 && puzzle[index - 14] == 0 && index != 37 && index != 38 && index != 39 && index != 44 && index != 45 && index != 46) {
           heuristic_counter += 1;
         }
-        else {
-          continue;
-        }
       }
     return heuristic_counter;
     } catch(ArrayIndexOutOfBoundsException e) {
@@ -67,14 +63,14 @@ public class Node {
     }
   }
 
-  // Sort children using by heuristic function
+  // Sort children list using by
   public void SortChildren() {
     for (int i = 0; i < children.size(); i++) {
       for (int j = 0; j < children.size(); j++) {
-        if (children.get(i).JumpCounter(children.get(i).puzzle) < children.get(j).JumpCounter(children.get(i).puzzle)) {
+        if (children.get(i).JumpCounter(children.get(i).puzzle) < children.get(j).JumpCounter(children.get(j).puzzle)) {
           Node temp = children.get(i);
-          children.set(i, children.get(j));
-          children.set(j, temp);
+          children.get(i).puzzle = children.get(j).puzzle;
+          children.get(j).puzzle = temp.puzzle;
         }
       }
     }
