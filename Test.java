@@ -118,6 +118,29 @@ public class Test {
             System.out.println("v. The number of nodes expanded during the search: " + dfsrs.getExplored().size());
             System.out.println("vi. Max number of nodes stored in the memory during the search: " + dfsrs.getMemorySize());
         }
+        else if(searchMethod.equals("Heuristic") || searchMethod.equals("Depth-First Search with a Node Selection Heuristic") || searchMethod.equals("Depth-First Search with a Node Selection Heuristic")){
+            System.out.println("i. Search method is depth first search and the time limit is " + timeLimit + " seconds.");
+            Heuristic heuristic = new Heuristic(timeLimit);
+            try{
+            ArrayList<Node> path = heuristic.Search(initNode);  
+            if (path.size() > 0) {
+               System.out.println("iii. The board states from the initial state to the final state: ");
+               for (int i = 0; i < path.size(); i++) {
+                 path.get(i).PrintPuzzle();
+               }
+            }
+            }
+            catch(NullPointerException e){
+                System.out.println("ii. No solution found – Time Limit.");
+            }
+              
+            catch(OutOfMemoryError e){
+              System.out.println("ii. No solution found – Out of Memory");
+            }
+            System.out.println("iv. Time spent on the dfs: " + heuristic.getElapsedTime() + " ms");
+            System.out.println("v. The number of nodes expanded during the search: " + heuristic.getExplored().size());
+            System.out.println("vi. Max number of nodes stored in the memory during the search: " + heuristic.getMemorySize());
+        }
         
         
     }

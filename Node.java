@@ -6,6 +6,7 @@ public class Node {
   public Node parent;
   public int[] puzzle = new int[49];
   public int depth = 0;
+  public int heuristic_counter;
 
   public Node(int[] puzzle) {
     SetPuzzle(puzzle);
@@ -25,13 +26,57 @@ public class Node {
   // düzelt
   public void ExpandNode() {
     for (int i = 0; i < puzzle.length; i++) {
-
       MoveDown(puzzle, i);
       MoveRight(puzzle, i);
       MoveLeft(puzzle, i);
       MoveUp(puzzle, i);
 
       }
+  }
+
+  // Heuristic funtion
+  // Node is jumpable or not
+  public int JumpCounter(int[] puzzle) {
+    int heuristic_counter = 0;
+    try {
+      for(int index = 0; index < puzzle.length; index++) {
+        // Right
+        if (puzzle[index] == 1 && puzzle[index + 1] == 1 && puzzle[index + 2] == 0 && index != 19 && index != 20 && index != 26 && index != 27) {
+          heuristic_counter += 1;
+        }
+        // Left
+        else if (puzzle[index] == 1 && puzzle[index - 1] == 1 && puzzle[index - 2] == 0 && index != 14 && index != 15 && index != 21 && index != 22) {
+          heuristic_counter += 1;
+        }
+        // Up
+        else if (puzzle[index] == 1 && puzzle[index + 7] == 1 && puzzle[index + 14] == 0 && index != 2 && index != 3 && index != 4 && index != 9 && index != 10 && index != 11) {
+          heuristic_counter += 1;
+        }
+        //Down
+        else if (puzzle[index] == 1 && puzzle[index - 7] == 1 && puzzle[index - 14] == 0 && index != 37 && index != 38 && index != 39 && index != 44 && index != 45 && index != 46) {
+          heuristic_counter += 1;
+        }
+        else {
+          continue;
+        }
+      }
+    return heuristic_counter;
+    } catch(ArrayIndexOutOfBoundsException e) {
+      return -1;
+    }
+  }
+
+  // Sort children using by heuristic function
+  public void SortChildren() {
+    for (int i = 0; i < children.size(); i++) {
+      for (int j = 0; j < children.size(); j++) {
+        if (children.get(i).JumpCounter(children.get(i).puzzle) < children.get(j).JumpCounter(children.get(i).puzzle)) {
+          Node temp = children.get(i);
+          children.set(i, children.get(j));
+          children.set(j, temp);
+        }
+      }
+    }
   }
 
   // Goal test function PEG-SOLITAIRE
