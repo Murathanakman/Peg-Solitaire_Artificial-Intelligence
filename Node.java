@@ -5,10 +5,11 @@ public class Node {
   public ArrayList<Node> children = new ArrayList<Node>();
   public Node parent;
   public int[] puzzle = new int[49];
-  public int depth = 0;
+  public int depth;
 
-  public Node(int[] puzzle) {
+  public Node(int[] puzzle, int depth {
     SetPuzzle(puzzle);
+    this.depth = depth;
   }
 
   //get Puzzle
@@ -65,7 +66,7 @@ public class Node {
           newPuzzle[index + 2] = 1;
     
           // Create a new node
-          Node child = new Node(newPuzzle);
+          Node child = new Node(newPuzzle, this.depth + 1);
           children.add(child);
     
           // Set the parent of the new node
@@ -91,7 +92,7 @@ public class Node {
         newPuzzle[index - 2] = 1;
 
         // Create a new node
-        Node child = new Node(newPuzzle);
+        Node child = new Node(newPuzzle, this.depth + 1);
         children.add(child);
 
         // Set the parent of the new node
@@ -117,7 +118,7 @@ public class Node {
         newPuzzle[index - 14] = 1;
 
         // Create a new node
-        Node child = new Node(newPuzzle);
+        Node child = new Node(newPuzzle, this.depth + 1);
         children.add(child);
 
         // Set the parent of the new node
@@ -142,7 +143,7 @@ public class Node {
         newPuzzle[index + 14] = 1;
 
         // Create a new node
-        Node child = new Node(newPuzzle);
+        Node child = new Node(newPuzzle, this.depth + 1);
         children.add(child);
 
         // Set the parent of the new node
