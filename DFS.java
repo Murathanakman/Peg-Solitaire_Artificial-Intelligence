@@ -61,15 +61,18 @@ public class DFS {
       PathTrace(path, FindBestSubOptimal(subOptimal));
       System.out.println("ii. Sub-optimum Solution Found with " + subOptimalPegNumber() + " remaining pegs");
       Collections.reverse(path);
+      elapsedTime = System.currentTimeMillis() - startTime;
       return path;
     } 
     else if (found == true){
       System.out.println("ii. Optimum solution found");
       // Reverse the path
       Collections.reverse(path);
+      elapsedTime = System.currentTimeMillis() - startTime;
       return path;
     }
     else{
+      elapsedTime = System.currentTimeMillis() - startTime;
       return null;
     }
   }
