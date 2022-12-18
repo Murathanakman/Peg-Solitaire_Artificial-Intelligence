@@ -30,6 +30,10 @@ public class IDS {
       frontier.add(initNode);
 
       while (frontier.size() > 0 && !found) {
+        elapsedTime = System.currentTimeMillis() - startTime;
+        if (elapsedTime > timeLimit * 1000) {  //Time limit
+          break;
+        }
         Node current = frontier.get(frontier.size() - 1);
         explored.add(current);
         frontier.remove(frontier.size() - 1);
