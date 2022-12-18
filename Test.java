@@ -24,7 +24,7 @@ public class Test {
         long timeLimit = input.nextInt();
     
         // Create initial node
-        Node initNode = new Node(puzzle);
+        Node initNode = new Node(puzzle, 0);
 
         if(searchMethod.equals("bfs") || searchMethod.equals("breadth first search") || searchMethod.equals("breadth-first search")){
             System.out.println("i. Search method is breadth first search and the time limit is " + timeLimit + " seconds.");
