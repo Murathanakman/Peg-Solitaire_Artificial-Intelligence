@@ -17,7 +17,8 @@ public class Test {
         Scanner input = new Scanner(System.in);
         System.out.print("Please enter the search method: ");
         String searchMethod = input.nextLine();
-
+        //convert to lower case
+        searchMethod = searchMethod.toLowerCase();
 
         // Get time limit value from user in minutes
         System.out.print("Please enter the time limit value (sec): ");
