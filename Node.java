@@ -7,7 +7,7 @@ public class Node {
   public int[] puzzle = new int[49];
   public int depth;
 
-  public Node(int[] puzzle, int depth {
+  public Node(int[] puzzle, int depth) {
     SetPuzzle(puzzle);
     this.depth = depth;
   }
